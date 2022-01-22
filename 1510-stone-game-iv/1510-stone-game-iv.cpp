@@ -14,7 +14,7 @@ public:
         }
         int winner = 0;
         for(int i=1;i*i<=n;i++){
-            if(!winnerSquareGame(n-(i*i))){
+            if(winnerSquareGame(n-(i*i))==false){
                 winner = 1;
                 break;
             }
