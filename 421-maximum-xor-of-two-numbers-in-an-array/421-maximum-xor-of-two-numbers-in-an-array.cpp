@@ -4,6 +4,9 @@ public:
         int n = nums.size();
         sort(nums.begin(),nums.end());
         // reverse(nums.begin(),nums.end());
+        for(int i=0;i<n;i++){
+            cout<<nums[i]<<" ";
+        }
         int ans = 0;
         for(int i=0;i<n;i++){
             if(ans>=pow(2,floor(log2(nums[i])+1))-1){
