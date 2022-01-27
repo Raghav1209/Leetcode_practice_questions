@@ -3,7 +3,7 @@ public:
     int findMaximumXOR(vector<int>& nums) {
         int n = nums.size();
         sort(nums.begin(),nums.end());
-        reverse(nums.begin(),nums.end());
+        // reverse(nums.begin(),nums.end());
         int ans = 0;
         for(int i=0;i<n;i++){
             if(ans>=pow(2,floor(log2(nums[i])+1))-1){
