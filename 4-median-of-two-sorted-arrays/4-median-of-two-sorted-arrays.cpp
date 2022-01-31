@@ -19,7 +19,7 @@ public:
             l++;
             h--;
         }
-        float median = (nums3[l]+nums3[h])/2;
+        double median = (nums3[l]+nums3[h])/2;
         return median;
         
         
