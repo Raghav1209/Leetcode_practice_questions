@@ -9,19 +9,19 @@ public:
                 nums[i] *= 2;
             }
              minn = min(minn,nums[i]);
-            pq.push(nums[i]);
+            // pq.push(nums[i]);
         }
         
-        // for(int i=0;i<nums.size();i++){
-        //     pq.push(nums[i]);
-        // }
+        for(int i=0;i<nums.size();i++){
+            pq.push(nums[i]);
+        }
         
         int diff = INT_MAX;
         
         while(!pq.empty() && pq.top()%2==0){
             int maxx = pq.top();
             pq.pop();
-             diff = min(diff,maxx-minn);
+            diff = min(diff,maxx-minn);
             minn = min(maxx/2,minn);
             pq.push(maxx/2);
         }
