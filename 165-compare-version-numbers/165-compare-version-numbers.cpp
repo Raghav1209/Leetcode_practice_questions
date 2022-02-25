@@ -70,10 +70,5 @@ public:
             return 0;
         }
         
-        // for(int i=0;i<v2.size();i++){
-        //     cout<<v2[i]<<" ";
-        // }
-        // cout<<endl;
-        // return 0;
     }
 };
