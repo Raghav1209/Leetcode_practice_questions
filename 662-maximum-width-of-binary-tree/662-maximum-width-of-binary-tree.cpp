@@ -37,10 +37,10 @@ public:
                 
                 
                 if(curr.first->left){
-                    q.push({curr.first->left, (long long)2*index+1});
+                    q.push({curr.first->left, (long long)2*index});
                 }
                 if(curr.first->right){
-                    q.push({curr.first->right, (long long)2*index+2});
+                    q.push({curr.first->right, (long long)2*index+1});
                 }
             }
         }
