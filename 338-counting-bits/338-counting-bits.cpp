@@ -3,7 +3,6 @@ public:
     vector<int> countBits(int n) {
         
         vector<int> v;
-        vector<string> v1;
         v.push_back(0);
         
         if(n==0){
@@ -22,11 +21,6 @@ public:
              v.push_back(count);
         }
         
-//         for(int i=0;i<v1.size();i++){
-//             cout<<v1[i]<<" ";
-//         }
-        
-//         cout<<endl;
         
         return v;
            
