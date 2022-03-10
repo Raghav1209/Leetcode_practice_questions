@@ -42,52 +42,70 @@ public:
         ListNode* p = l1;
         ListNode* q = l2;
         int sum,x;
-        while(p && q){
+        while(p || q){
             
             if(carry){
-                sum = p->val + q->val + carry;
+                if(p && q==NULL){
+                    sum = p->val + carry;
+                }else if(p==NULL && q){
+                    sum = q->val + carry;
+                }
+                else{
+                    sum = p->val + q->val + carry;
+                }
             }else{
-                sum = p->val + q->val;
+                if(p==NULL && q){
+                    sum = q->val + carry;
+                }else if(p && q==NULL){
+                    sum = p->val + carry;
+                }else{
+                    sum = p->val + q->val + carry;
+                }
             }
              x = sum % 10;
              carry = sum/10;
             ListNode* node = new ListNode(x);
             node->next = res;
             res = node;
-            p=p->next;
-            q=q->next;
             
+            if(p){
+                p=p->next;
+            }
+            
+            if(q){
+                q=q->next;
+            }
         }
         
-        while(p){
-            if(carry){
-                sum = p->val  + carry;
-            }else{
-                sum = p->val;
-            }
-            x = sum % 10;
-            carry = sum/10;
-            ListNode* node = new ListNode(x);
-            node->next = res;
-            res = node;
-            p=p->next;
-            // q=q->next;
-        }
+        // while(p){
+        //     if(carry){
+        //         sum = p->val  + carry;
+        //     }else{
+        //         sum = p->val;
+        //     }
+        //     x = sum % 10;
+        //     carry = sum/10;
+        //     ListNode* node = new ListNode(x);
+        //     node->next = res;
+        //     res = node;
+        //     p=p->next;
+        //     // q=q->next;
+        // }
         
-        while(q){
-            if(carry){
-                sum =  q->val + carry;
-            }else{
-                sum =  q->val;
-            }
-             x = sum % 10;
-             carry = sum/10;
-            ListNode* node = new ListNode(x);
-            node->next = res;
-            res = node;
-            // p=p->next;
-            q=q->next;
-        }
+        // while(q){
+        //     if(carry){
+        //         sum =  q->val + carry;
+        //     }else{
+        //         sum =  q->val;
+        //     }
+        //      x = sum % 10;
+        //      carry = sum/10;
+        //     ListNode* node = new ListNode(x);
+        //     node->next = res;
+        //     res = node;
+        //     // p=p->next;
+        //     q=q->next;
+        // }
         
         if(carry){
             ListNode* node = new ListNode(carry);
