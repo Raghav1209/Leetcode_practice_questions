@@ -11,37 +11,45 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-         if(!head)
-            return 0;
-		//if list containg a single node return head
-        if(!head -> next)
-            return head;
         
-		// keepitn val of head in a temp variable var.
-        int val = head ->val;
-		// temp contain the reference of next  node
-        ListNode *temp = head -> next;
-        
-		// if the next node have different value then,
-		// update head->next by temp(temp contains reference to next node)
-        if(temp -> val != val)
-        {
-            head -> next = deleteDuplicates(temp);
+        if(head==NULL){
             return head;
         }
-        else
-        {
-			// if the values are same just update temp to temp->next;
-           while(temp && temp -> val == val)
-            {
-				// assigning temp to p 
-                ListNode *p = temp;
-				// updating temp with next node
-                temp = temp->next;
-				// freeing the memory
-                delete p;
+        
+        ListNode* p = head;
+        ListNode* q = head->next;
+        ListNode* prev = new ListNode(-1);
+        prev->next = head;
+        ListNode* new_prev = prev;
+        while(q){
+            
+            if(p->val != q->val){
+                new_prev=p;
+                p=p->next;
+                q=q->next;
+            }else{
+                // q=q->next;
+                while(p->val == q->val){
+                    q=q->next;
+                    if(q==NULL){
+                        break;
+                    }
+                }
+                while(p!=q){
+                    ListNode* temp = p;
+                    p=p->next;
+                    delete(temp);
+                }
+                new_prev->next = p;
+                if(q==NULL){
+                    break;
+                }
+                q=q->next;
             }
-            return deleteDuplicates(temp);
+            
         }
+        
+        return prev->next;
+        
     }
 };
