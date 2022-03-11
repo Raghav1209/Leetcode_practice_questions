@@ -29,11 +29,11 @@ public:
                 q=q->next;
             }else{
                 // q=q->next;
-                while(p->val == q->val){
+                while(q && p->val == q->val){
                     q=q->next;
-                    if(q==NULL){
-                        break;
-                    }
+                    // if(q==NULL){
+                    //     break;
+                    // }
                 }
                 while(p!=q){
                     ListNode* temp = p;
