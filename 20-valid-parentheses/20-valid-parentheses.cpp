@@ -13,13 +13,10 @@ public:
                     return false;
                 }else{
                 // while(!st.empty()){
-                    if(st.top()=='(' && s[i]==')'){
+                    if((st.top()=='(' && s[i]==')') || (st.top()=='[' && s[i]==']') ||                                  (st.top()=='{' && s[i]=='}')){
                         st.pop();
-                    }else if(st.top()=='[' && s[i]==']'){
-                        st.pop();
-                    }else if(st.top()=='{' && s[i]=='}'){
-                        st.pop();
-                    }else{
+                    }
+                    else{
                         return false;
                     }
                 }
