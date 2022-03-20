@@ -10,11 +10,12 @@ public:
         // int k = 0;
         for(int i=0;i<n;i++){
             count1[tops[i]]++;
-        }
-        
-        for(int i=0;i<n;i++){
             count2[bottoms[i]]++;
         }
+        
+//         for(int i=0;i<n;i++){
+//             count2[bottoms[i]]++;
+//         }
         
         int maxx1 = *max_element(count1.begin(),count1.end());
         int maxx2 = *max_element(count2.begin(),count2.end());
