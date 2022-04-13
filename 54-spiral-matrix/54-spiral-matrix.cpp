@@ -10,7 +10,7 @@ public:
         int right = c-1;
         
         while(top<=bottom && left<=right){
-            for(int i=top;i<=right;i++){
+            for(int i=left;i<=right;i++){
                 v.push_back(matrix[top][i]);
             }
             top++;
