@@ -13,6 +13,7 @@ class Solution {
 public:
     
     TreeNode* search(TreeNode* root,int val){
+        
         if(root==NULL){
             return NULL;
         }
@@ -33,10 +34,26 @@ public:
     
     TreeNode* searchBST(TreeNode* root, int val) {
         
-        TreeNode* res =  search(root,val);
+        if(root==NULL){
+            return NULL;
+        }
+        
+        if(root->val==val){
+            return root;
+        }
+        
+        if(root->val>val){
+            return searchBST(root->left,val);
+            // return x;
+        }else{
+             return searchBST(root->right,val);
+            // return y;
+        }
+        
+        // TreeNode* res =  search(root,val);
         
         
-        return res;
+        // return res;
         
     }
 };
