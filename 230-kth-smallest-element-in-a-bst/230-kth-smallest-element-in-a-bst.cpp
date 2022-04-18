@@ -21,15 +21,16 @@ public:
                 x = root;
                 return;
             }
+            if(count>k){
+                return;
+            }
             solve(root->right,k,count);
         }
         
     }
     
-    // int count = 0;
     TreeNode* x;
     int kthSmallest(TreeNode* root, int k) {
-         // TreeNode* x = NULL;
         int count = 0;   
         solve(root,k,count);
         return x->val;
