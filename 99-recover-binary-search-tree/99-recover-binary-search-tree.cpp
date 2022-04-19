@@ -12,18 +12,18 @@
 class Solution {
 public:
     
-    void inorder(TreeNode* root,vector<int> &v){
-        if(root!=NULL){
-            inorder(root->left,v);
-            v.push_back(root->val);
-            inorder(root->right,v);
-        }
-    }
+    // void inorder(TreeNode* root,vector<int> &v){
+    //     if(root!=NULL){
+    //         inorder(root->left,v);
+    //         v.push_back(root->val);
+    //         inorder(root->right,v);
+    //     }
+    // }
     
-    void solve(TreeNode* root,vector<int> &v){
+    void solve(TreeNode* root){
         
         if(root!=NULL){
-            solve(root->left,v);
+            solve(root->left);
             if(prev!=NULL && prev->val>root->val){
                 if(first==NULL){
                     first = prev;
@@ -31,7 +31,7 @@ public:
                 second = root;
             }
             prev = root;
-            solve(root->right,v);
+            solve(root->right);
         }
         
     }
@@ -39,9 +39,9 @@ public:
     TreeNode *first=NULL,*second=NULL;
     TreeNode* prev = NULL;
     void recoverTree(TreeNode* root) {
-        vector<int> v;
-        inorder(root,v);
-        solve(root,v);
+        // vector<int> v;
+        // inorder(root,v);
+        solve(root);
         swap(first->val,second->val);
     }
 };
