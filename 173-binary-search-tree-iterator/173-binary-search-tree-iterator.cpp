@@ -12,7 +12,7 @@
 class BSTIterator {
 public:
     vector<int> v;
-    int i=0;
+    int i=-1;
     
     void inorder(TreeNode* root){
         if(root!=NULL){
@@ -31,12 +31,12 @@ public:
     }
     
     int next() {
-        // i++;
-        return v[i++];
+        i++;
+        return v[i];
     }
     
     bool hasNext() {
-        if(i!=v.size()){
+        if(i!=v.size()-1){
             return true;
         }else{
             return false;
