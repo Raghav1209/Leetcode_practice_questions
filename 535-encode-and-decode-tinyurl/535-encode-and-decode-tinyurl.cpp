@@ -22,6 +22,7 @@ public:
         }
         
         mp.insert({longUrl,str});
+        cout<<str<<" ";
         
         return str;
         
