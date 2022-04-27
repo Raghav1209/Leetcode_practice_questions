@@ -41,13 +41,20 @@ public:
                  DFS(s,vertex,characters,indices);
                  
                  
-                  sort(characters.begin(),characters.end());
-                sort(indices.begin(),indices.end());
+//                   sort(characters.begin(),characters.end());
+//                   sort(indices.begin(),indices.end());
+             
+//                  for(int idx=0;idx<characters.size();idx++){
+//                      s[indices[idx]] = characters[idx];
+//                  }
+             }
+             
+              sort(characters.begin(),characters.end());
+                  sort(indices.begin(),indices.end());
              
                  for(int idx=0;idx<characters.size();idx++){
                      s[indices[idx]] = characters[idx];
                  }
-             }
              
     
              
