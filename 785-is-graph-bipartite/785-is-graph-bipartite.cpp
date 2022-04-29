@@ -12,6 +12,7 @@ public:
             int u = q.front();
             q.pop();
             vector<int> x = graph[u];
+            
             if(color[u]==-1){
                 color[u] = 1;
             }
