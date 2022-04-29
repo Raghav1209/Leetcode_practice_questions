@@ -26,7 +26,7 @@ public:
                 if(color[x[i]]==-1){
                     color[x[i]] = !color[u];
                 }else{
-                    if(color[x[i]] != !color[u]){
+                    if(color[x[i]] == color[u]){
                         return false;
                     }
                 }
