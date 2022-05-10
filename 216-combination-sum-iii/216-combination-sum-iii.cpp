@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    void solve(int prev,int k,int sum,int n,vector<vector<int>> &ans,vector<int> temp){
+    void solve(int prev,int k,int sum,int n,vector<vector<int>> &ans,vector<int> &temp){
         if(k==0){
             if(sum==n){
                 ans.push_back(temp);
