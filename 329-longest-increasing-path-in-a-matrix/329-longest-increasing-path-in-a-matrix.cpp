@@ -1,38 +1,49 @@
 class Solution {
 public:
-    int help(vector<vector<int>>& matrix, int i, int j, vector<vector<int>>& h)
-    {
-        if(h[i][j] != -1) return h[i][j];
-        int x[] = {0,0,1,-1};
-        int y[] = {1,-1,0,0};
-        int tmp_ans = 0;
-        for(int n = 0; n < 4; n++)
-        {
-            int new_i = x[n] + i;
-            int new_j = y[n] + j;
-            if(new_i >= 0 && new_j >= 0 && new_i < matrix.size() && new_j < matrix[i].size()) 
-            {
-                if(matrix[new_i][new_j] > matrix[i][j])
-                tmp_ans = max(tmp_ans,1+help(matrix,new_i,new_j,h));
-            }
+    
+    int lip(vector<vector<int>>& matrix,int i,int j,vector<vector<int>>& memo){
+        if(i<0 || j<0 || i>=matrix.size() || j>=matrix[0].size()){
+            return 0;
         }
-        h[i][j] = tmp_ans;
-        return h[i][j];
+        
+        if(memo[i][j]>0){
+            return memo[i][j];
+        }
+        int currMax = 1;
+        
+        if(j+1>=0 && j+1<matrix[0].size() && matrix[i][j+1]>matrix[i][j]){
+            currMax = max(currMax,1+lip(matrix,i,j+1,memo));
+        }
+        
+        if(i+1<matrix.size() && i+1>=0 && matrix[i+1][j]>matrix[i][j]){
+            currMax = max(currMax,1+lip(matrix,i+1,j,memo));
+        }
+        
+         if(i-1>=0 && i-1<matrix.size() && matrix[i-1][j]>matrix[i][j]){
+            currMax = max(currMax,1+lip(matrix,i-1,j,memo));
+        }
+        
+         if(j-1>=0 && j-1<matrix[0].size() && matrix[i][j-1]>matrix[i][j]){
+            currMax = max(currMax,1+lip(matrix,i,j-1,memo));
+        }
+        
+        memo[i][j] = currMax;
+        return currMax;
+        
     }
     
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        vector<vector<int>> h (matrix.size(),vector<int>(matrix[0].size(),-1));
         
+        vector<vector<int>> memo(matrix.size(),vector<int>(matrix[0].size(),0));
+        int Max = 0;
         
-        
-        int ans = 0;
-        for(int i = 0; i < matrix.size(); i++)
-        {
-            for(int j = 0; j < matrix[0].size(); j++)
-            {
-               ans = max(ans,1+help(matrix,i,j,h));
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[0].size();j++){
+                Max = max(Max,lip(matrix,i,j,memo));
             }
         }
-        return ans;
+        
+        return Max;
+        
     }
 };
