@@ -1,41 +1,73 @@
 class Solution {
 public:
-    vector<vector<string>> ret;
-    bool is_valid(vector<string> &board, int row, int col){
-        // check col
-        for(int i=row;i>=0;--i)
-            if(board[i][col] == 'Q') return false;
-        // check left diagonal
-        for(int i=row,j=col;i>=0&&j>=0;--i,--j)
-            if(board[i][j] == 'Q') return false;
-        //check right diagonal
-        for(int i=row,j=col;i>=0&&j<board.size();--i,++j)
-            if(board[i][j] == 'Q') return false;
-        return true;
-    }
-    void dfs(vector<string> &board, int row){
-        // exit condition
-        if(row == board.size()){
-            ret.push_back(board);
-            return;
-        }
-        // iterate every possible position
-        for(int i=0;i<board.size();++i){
-            if(is_valid(board,row,i)){
-                // make decision
-                board[row][i] = 'Q';
-                // next iteration
-                dfs(board,row+1);
-                // back-tracking
-                board[row][i] = '.';
+    
+    bool isSafe(vector<string> &board,int row,int col,int n){
+        int i,j;
+        for(int i=col;i>=0;i--){
+            if(board[row][i]=='Q'){
+                return false;
             }
         }
+        
+        i=row;
+        j=col;
+        
+        while(i>=0 && j>=0){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+            i--;
+            j--;
+        }
+        
+        i = row;
+        j = col;
+        
+        while(i<n && j>=0){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        
+        return true;
+        
     }
+    
+    void solve(vector<string>& board,int col,int n){
+        
+        if(col==n){
+            sols.push_back(board);
+            return;
+        }
+        
+        for(int i=0;i<n;i++){
+            if(isSafe(board,i,col,n)){
+                board[i][col] = 'Q';
+                
+                solve(board,col+1,n);
+                
+                board[i][col] = '.';
+                
+            }
+        }
+        
+        
+        
+    }
+    
+    vector<vector<string>> sols;
     vector<vector<string>> solveNQueens(int n) {
-		// return empty if n <= 0
-        if(n <= 0) return {{}};
-        vector<string> board(n,string(n,'.'));
-        dfs(board,0);
-        return ret;
-    }
+        
+        
+        
+        vector<string> board(n, string(n, '.'));
+        
+            solve(board,0,n);
+            // sols.push_back(board);
+            return sols;
+        }
+        
+    
 };
