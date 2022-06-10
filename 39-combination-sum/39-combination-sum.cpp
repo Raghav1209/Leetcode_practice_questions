@@ -1,26 +1,35 @@
 class Solution {
 public:
     
-    void find(int pos,int target,vector<int> arr,vector<int> &comb,vector<vector<int>> &ans){
-        if(target==0){
-            ans.push_back(comb);
+    void find(int index,int sum,vector<int> arr,vector<int> curr,set<vector<int>> &s){
+        
+        if(sum<0){
             return;
         }
         
-        while(pos<arr.size() && arr[pos]<=target){
-            comb.push_back(arr[pos]);
-            find(pos,target-arr[pos],arr,comb,ans);
-            
-            pos++;
-            comb.pop_back();
+        if(sum==0){
+            s.insert(curr);
+            return;
         }
+        
+        for(int i=index;i<arr.size();i++){
+            curr.push_back(arr[i]);
+            find(i,sum-arr[i],arr,curr,s);
+            curr.pop_back();
+        }
+        
     }
     
     vector<vector<int>> combinationSum(vector<int>& arr, int target) {
         sort(arr.begin(),arr.end());
         vector<vector<int>> ans;
-        vector<int> comb;
-        find(0,target,arr,comb,ans);
+        set<vector<int>> s;
+        vector<int> curr;
+        find(0,target,arr,curr,s);
+        
+        for(auto x : s){
+            ans.push_back(x);
+        }
         return ans;
     }
 };
