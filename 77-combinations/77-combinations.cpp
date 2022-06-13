@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    void solve(int n,int k,vector<int> curr,int index,set<vector<int>> &s){
+    void solve(int n,int k,vector<int> &curr,int index,set<vector<int>> &s){
         
         if(curr.size()==k){
             sort(curr.begin(),curr.end());
