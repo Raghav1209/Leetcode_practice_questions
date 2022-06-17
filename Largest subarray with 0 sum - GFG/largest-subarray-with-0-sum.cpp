@@ -14,31 +14,26 @@ class Solution{
     {   
         // Your code here
         int sum = 0;
-        unordered_map<int,int> mp;
+        unordered_map<int,vector<int>> mp;
         int maxx = 0;
         for(int i=0;i<n;i++){
             
             sum += A[i];
             
             if(sum==0){
-                maxx = i+1;
-            }else{
-                
-            
+                maxx = max(maxx,i+1);
+            }
             
             if(mp.find(sum)!=mp.end()){
                 
-                // vector<int> vc = mp[sum];
-                // for(int j=0;j<vc.size();j++){
-                    maxx = max(maxx,i-mp[sum]);
-                // }
+                vector<int> vc = mp[sum];
+                for(int j=0;j<vc.size();j++){
+                    maxx = max(maxx,i-vc[j]);
+                }
                 
-            }else{
-                mp[sum] = i ;
-            }
             }
             
-            
+            mp[sum].push_back(i);
             
         }
         
