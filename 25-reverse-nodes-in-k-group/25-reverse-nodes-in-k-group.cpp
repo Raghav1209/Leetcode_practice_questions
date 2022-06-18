@@ -10,68 +10,36 @@
  */
 class Solution {
 public:
-    
-    ListNode* reverse(ListNode* head)
-    {
-        // Initialize current, previous and
-        // next pointers
-        ListNode* current = head;
-        ListNode *prev = NULL, *next = NULL;
-  
-        while (current != NULL) {
-            // Store next
-            next = current->next;
-  
-            // Reverse current node's pointer
-            current->next = prev;
-  
-            // Move pointers one position ahead.
-            prev = current;
-            current = next;
-        }
-        head = prev;
-        return head;
-    }
-    
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* p = head;
-        ListNode* reversell;
-        int m = k;
-        ListNode* res = NULL;
-        ListNode* rev = NULL;
-        // vector<ListNode*> v;
-        while(p!=NULL){
-            while(m>0){
-                if(p==NULL){
-                    break;
-                }
-                ListNode* node = new ListNode(p->val);
-                node->next = rev;
-                rev = node;
-                p=p->next;
-                // if(m==k){
-                //     ListNode* temp = rev;
-                // }
-                m--;
+        
+        ListNode* temp = head;
+        
+        for(int i=1;i<k;i++){
+            temp = temp->next;
+            if(temp == NULL){
+                return head;
             }
-            if(m==0){
-                 reversell = reverse(rev);
-            }else{
-                reversell = rev;
-            }
-             ListNode* q = reversell;
-                while(q->next){
-                    q = q->next;
-                }
-            q->next=res;
-            res = reversell;
-            m=k;
-            rev=NULL;
         }
         
-        ListNode* req = reverse(res);
+        ListNode* nextnode = temp->next;
         
-        return req;
+        ListNode* curr = head;
+        ListNode* p = head;
+        ListNode* prev = NULL;
+        ListNode* nexn = curr;
+        while(nexn!=nextnode){
+            nexn = nexn->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nexn;
+        }
+        
+        if(nextnode){
+              p->next = reverseKGroup(nextnode,k);
+        }
+        
+        return temp;
        
+        
     }
 };
