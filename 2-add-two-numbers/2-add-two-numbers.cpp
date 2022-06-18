@@ -12,10 +12,9 @@ class Solution {
 public:
     
     ListNode* reverse(ListNode* head){
-        
+        ListNode* prev = NULL;
         ListNode* curr = head;
         ListNode* nextnode = head;
-        ListNode* prev = NULL;
         
         while(nextnode){
             nextnode = nextnode->next;
@@ -25,97 +24,74 @@ public:
         }
         
         return prev;
-        
     }
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-        if(l1==NULL){
-            return l2;
-        }
-        
-        if(l2==NULL){
-            return l1;
-        }
+        int sum;
         ListNode* res = NULL;
         int carry = 0;
         ListNode* p = l1;
         ListNode* q = l2;
-        int sum,x;
-        while(p || q){
+        
+        while(p && q){
             
-            if(carry){
-                if(p && q==NULL){
-                    sum = p->val + carry;
-                }else if(p==NULL && q){
-                    sum = q->val + carry;
-                }
-                else{
-                    sum = p->val + q->val + carry;
-                }
+            sum = p->val+q->val+carry;
+            
+            if(sum>=10){
+                carry = sum/10;
+                ListNode* node = new ListNode(sum%10);
+                node->next = res;
+                res = node;
             }else{
-                if(p==NULL && q){
-                    sum = q->val + carry;
-                }else if(p && q==NULL){
-                    sum = p->val + carry;
-                }else{
-                    sum = p->val + q->val + carry;
-                }
+                ListNode* node = new ListNode(sum);
+                node->next = res;
+                res=node;
+                carry = 0;
             }
-             x = sum % 10;
-             carry = sum/10;
-            ListNode* node = new ListNode(x);
-            node->next = res;
-            res = node;
-            
-            if(p){
-                p=p->next;
-            }
-            
-            if(q){
-                q=q->next;
-            }
+            p=p->next;
+            q=q->next;
         }
         
-        // while(p){
-        //     if(carry){
-        //         sum = p->val  + carry;
-        //     }else{
-        //         sum = p->val;
-        //     }
-        //     x = sum % 10;
-        //     carry = sum/10;
-        //     ListNode* node = new ListNode(x);
-        //     node->next = res;
-        //     res = node;
-        //     p=p->next;
-        //     // q=q->next;
-        // }
+        while(p){
+            sum = p->val+carry;
+            if(sum>=10){
+                carry = sum/10;
+                ListNode* node = new ListNode(sum%10);
+                node->next = res;
+                res = node;
+            }else{
+                ListNode* node = new ListNode(sum);
+                node->next = res;
+                res=node;
+                carry = 0;
+            }
+            p=p->next;
+        }
         
-        // while(q){
-        //     if(carry){
-        //         sum =  q->val + carry;
-        //     }else{
-        //         sum =  q->val;
-        //     }
-        //      x = sum % 10;
-        //      carry = sum/10;
-        //     ListNode* node = new ListNode(x);
-        //     node->next = res;
-        //     res = node;
-        //     // p=p->next;
-        //     q=q->next;
-        // }
+        while(q){
+            sum = q->val+carry;
+            if(sum>=10){
+                carry = sum/10;
+                ListNode* node = new ListNode(sum%10);
+                node->next = res;
+                res = node;
+            }else{
+                ListNode* node = new ListNode(sum);
+                node->next = res;
+                res=node;
+                carry = 0;
+            }
+            q=q->next;
+        }
         
         if(carry){
             ListNode* node = new ListNode(carry);
             node->next = res;
             res = node;
         }
-        
-        ListNode* req = reverse(res);
-        
-        return req;
+        res = reverse(res);
+        return res;
         
     }
 };
