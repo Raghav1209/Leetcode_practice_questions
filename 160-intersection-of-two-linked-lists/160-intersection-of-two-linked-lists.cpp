@@ -10,32 +10,32 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
+        int countA = 0;
+        int countB = 0;
+        
         ListNode* p = headA;
         ListNode* q = headB;
-        int countA,countB;
-        countA = countB = 0;
-
-        while(p!=NULL){
+        
+        while(p){
             countA++;
             p=p->next;
         }
         
-        while(q!=NULL){
+        while(q){
             countB++;
             q=q->next;
         }
-        
+        p = headA;
+        q = headB;
         int diff = abs(countA-countB);
-        int i=0;
-        p=headA;
-        q=headB;
+        int i = 0;
         if(countA>countB){
-            while(i!=diff){
+            while(i<diff){
                 p=p->next;
                 i++;
             }
         }else{
-            while(i!=diff){
+            while(i<diff){
                 q=q->next;
                 i++;
             }
