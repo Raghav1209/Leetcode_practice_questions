@@ -7,6 +7,7 @@ public:
             sum += nums[i];
             v.push_back(sum);
         }
+        
         return v;
     }
 };
