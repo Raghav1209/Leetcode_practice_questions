@@ -16,41 +16,59 @@ public:
 
 class Solution {
 public:
-    
     Node* copyRandomList(Node* head) {
         
         if(head==NULL){
-return head;}
-        
-       Node* temp = head;
-        while(temp){
-            Node* node = new Node(temp->val);
-            node->next = temp->next;
-            temp->next = node;
-            temp=node->next;
-        }
-        temp = head;
-        while(temp){
-            temp->next->random = (temp->random)?temp->random->next:NULL;
-            temp = temp->next->next;
+            return NULL;
         }
         
-        Node* res = head->next;
-        temp = head->next;
+        Node* p = head;
+        while(p){
+            Node* node = new Node(p->val);
+            // if(p->next==NULL){
+            //     p->next = node;
+            //     break;
+            // }
+            node->next = p->next;
+            p->next = node;
+            p=node->next;
+        }
+       
+        p = head;
+        Node* q = p->next;
+        Node* new_head = head->next;
         
-        while(head){
+        while(p){
+            if(p->random){
+                 p->next->random = p->random->next;
+            }else{
+                p->next->random = NULL;
+            }
             
-            head->next = temp->next;
-            head=head->next;
-            if(head==NULL){
+           p=p->next->next;
+            if(p==NULL){
                 break;
             }
-            temp->next = head->next;
-            temp=temp->next;
-            
+            q=q->next->next;
+           
+        }
+        p=head;
+        q = head->next;
+        while(p){
+            p->next = q->next;
+            p=p->next;
+            if(!p){
+                break;
+            }           
+            q->next=p->next;
+                q=q->next;
         }
         
-        return res;
-
+       
+        
+        return new_head;
+        
+        // return head;
+        
     }
 };
