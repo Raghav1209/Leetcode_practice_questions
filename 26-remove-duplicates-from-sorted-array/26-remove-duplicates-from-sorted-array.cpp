@@ -3,16 +3,18 @@ public:
     int removeDuplicates(vector<int>& nums) {
         
         // int count = 0;
-        int n = nums.size();
-        
-        int i = 0;
-        for(int j=1;j<n;j++){
-            if(nums[i]!=nums[j]){
+        // int n = nums.size();
+        for(int i=0;i<nums.size()-1;){
+            if(nums[i]==nums[i+1]){
+            nums.erase(nums.begin()+i+1);
+            }else{
                 i++;
-                nums[i]=nums[j];
-            }
+            }    
         }
         
-         return i+1;
+       
+        
+
+         return nums.size();
     }
 };
