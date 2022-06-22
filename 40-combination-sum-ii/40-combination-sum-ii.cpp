@@ -19,9 +19,9 @@ public:
                 continue;
             }
             
-            if(sum<nums[i]){
-                break;
-            }
+            // if(sum<nums[i]){
+            //     break;
+            // }
             
             v.push_back(nums[i]);
             solve(nums,sum-nums[i],s,v,i+1);
