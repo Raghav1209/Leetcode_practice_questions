@@ -1,10 +1,10 @@
 class Solution {
 public:
     
-    bool isSafe(vector<string> &board,int row,int col,int n){
+    bool isSafe(vector<vector<string>> &ans,vector<string> &v,int row,int col,int n){
         int i,j;
-        for(int i=col;i>=0;i--){
-            if(board[row][i]=='Q'){
+        for(int k=col;k>=0;k--){
+            if(v[row][k]=='Q'){
                 return false;
             }
         }
@@ -13,18 +13,18 @@ public:
         j=col;
         
         while(i>=0 && j>=0){
-            if(board[i][j]=='Q'){
+            if(v[i][j]=='Q'){
                 return false;
             }
             i--;
             j--;
         }
         
-        i = row;
-        j = col;
+        i=row;
+        j=col;
         
         while(i<n && j>=0){
-            if(board[i][j]=='Q'){
+            if(v[i][j]=='Q'){
                 return false;
             }
             i++;
@@ -35,39 +35,41 @@ public:
         
     }
     
-    void solve(vector<string>& board,int col,int n){
+    void solve(vector<vector<string>> &ans,vector<string> &v,int col,int n){
         
         if(col==n){
-            sols.push_back(board);
+            ans.push_back(v);
             return;
         }
         
         for(int i=0;i<n;i++){
-            if(isSafe(board,i,col,n)){
-                board[i][col] = 'Q';
-                
-                solve(board,col+1,n);
-                
-                board[i][col] = '.';
-                
+            
+            if(isSafe(ans,v,i,col,n)){
+                v[i][col] = 'Q';
+                solve(ans,v,col+1,n);
+                v[i][col] = '.';
             }
+            
         }
-        
-        
         
     }
     
-    vector<vector<string>> sols;
     vector<vector<string>> solveNQueens(int n) {
         
         
         
-        vector<string> board(n, string(n, '.'));
+        string str(n,'.');
         
-            solve(board,0,n);
-            // sols.push_back(board);
-            return sols;
-        }
+        vector<vector<string>> ans;
         
-    
+        vector<string> v(n,str);
+        
+       solve(ans,v,0,n);
+        
+        return ans;
+        
+       
+        
+        
+    }
 };
