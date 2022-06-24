@@ -20,7 +20,6 @@ public:
             }
             
             int old = pq.top()%sum;
-            
             if(sum!=1 && old==0){
                 return false;
             }
