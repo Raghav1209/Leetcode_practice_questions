@@ -28,14 +28,14 @@ public:
                  minpq.push(num);
             }else{
                 
-                if(minpq.top()<maxpq.top()){
-                     int temp1 = minpq.top();
-                    int temp2 = maxpq.top();
-                    minpq.pop();
-                    maxpq.pop();
-                    minpq.push(temp2);
-                    maxpq.push(temp1);
-                }
+                // if(minpq.top()<maxpq.top()){
+                //      int temp1 = minpq.top();
+                //     int temp2 = maxpq.top();
+                //     minpq.pop();
+                //     maxpq.pop();
+                //     minpq.push(temp2);
+                //     maxpq.push(temp1);
+                // }
                maxpq.push(num);
             }
         }else{
