@@ -25,10 +25,6 @@ public:
         Node* p = head;
         while(p){
             Node* node = new Node(p->val);
-            // if(p->next==NULL){
-            //     p->next = node;
-            //     break;
-            // }
             node->next = p->next;
             p->next = node;
             p=node->next;
@@ -49,7 +45,7 @@ public:
             if(p==NULL){
                 break;
             }
-            q=q->next->next;
+            // q=q->next->next;
            
         }
         p=head;
