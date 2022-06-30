@@ -4,71 +4,73 @@ public:
         
         vector<int> v1;
         vector<int> v2;
-        int flag;
         string str = "";
         for(int i=0;i<version1.size();i++){
-            if(version1[i]!='.'){
-                str += version1[i];
-            }else{
+            
+            if(version1[i]=='.'){
                 v1.push_back(stoi(str));
                 str = "";
+            }else{
+                str += version1[i];
             }
+            
         }
-        
-        v1.push_back(stoi(str));
+         v1.push_back(stoi(str));
         str = "";
         
         for(int i=0;i<version2.size();i++){
-            if(version2[i]!='.'){
-                str += version2[i];
-            }else{
+            
+            if(version2[i]=='.'){
                 v2.push_back(stoi(str));
                 str = "";
+            }else{
+                str += version2[i];
             }
+            
         }
-        
-        v2.push_back(stoi(str));
+         v2.push_back(stoi(str));
         str = "";
         
-        if(v1.size()<v2.size()){
-            int k = v1.size();
-            while(k!=v2.size()){
-                 v1.push_back(0);
+        int n = v1.size();
+        int m = v2.size();
+        
+        
+        if(n<m){
+            int k = n;
+            while(k!=m){
+                v1.push_back(0);
                 k++;
             }
         }else{
-            int k = v2.size();
-            while(k!=v1.size()){
-                 v2.push_back(0);
+            int k = m;
+            while(k!=n){
+                v2.push_back(0);
                 k++;
             }
         }
         
-        int j = 0;
-        while(j<v1.size()){
-            if(v1[j]<v2[j]){
+        int i=0;
+        // int j=0;
+        int flag=1;
+        
+        while(i<v1.size()){
+            if(v1[i]>v2[i]){
+                return 1;
+            }else if(v1[i]<v2[i]){
                 return -1;
-            }else if(v1[j]>v2[j]){
-                if(j==0){
-                    return 1;
-                }
-                if(flag==0){
-                    return 1;
-                }
-                flag = 1;
             }else{
                 flag = 0;
-                j++;
-                continue;
+                i++;
+                // j++;
             }
-            j++;
         }
         
-        if(flag){
-            return 1;
-        }else{
+        if(flag==0){
             return 0;
+        }else{
+            return 1;
         }
+        
         
     }
 };
