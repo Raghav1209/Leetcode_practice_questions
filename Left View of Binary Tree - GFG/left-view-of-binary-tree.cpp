@@ -150,7 +150,7 @@ vector<int> leftView(Node *root)
    // Your code here
    vector<int> v;
    maxlevel=-1;
-   int level = 1;
+   int level = 0;
    left(root,v,level);
    return v;
    
