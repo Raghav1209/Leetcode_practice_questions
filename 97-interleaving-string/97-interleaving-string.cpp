@@ -1,60 +1,40 @@
-// class Solution {
-// public:
-//     bool isInterleave(string s1, string s2, string s3) {
-        
-//         int m = s1.size();
-//         int n = s2.size();
-//         int k = s3.size();
-        
-//         if(m+n !=k){
-//             return false;
-//         }
-        
-//         while(m>0 && n>0 && s1[m-1]==s2[n-1] && s1[m-1]==s3[k-1]){
-//             m--;
-//             n--;
-//             k--;
-//         }
-        
-//         if(m==0 && n==0){
-//             return true;
-//         }
-        
-//         if(m==0){
-//             return s2.substr(0,n)==s3.substr(0,n);
-//         }
-        
-//         if(n==0){
-//             return s1.substr(0,m) == s3.substr(0,m);
-//         }
-        
-//         if(s1[m-1]==s3[k-1]){
-//             return isInterleave(s1.substr(0,m-1),s2,s3.substr(0,k-1));
-//         }
-        
-//         if(s2[n-1]==s3[k-1]){
-//             return isInterleave(s1,s2.substr(0,n-1),s3.substr(0,k-1));
-//         }
-        
-//         return false;
-        
-//     }
-// };
-
 class Solution {
 public:
-    bool isInterleave(string s1, string s2, string s3) {
-        int m = s1.size(), n = s2.size(), k = s3.size();
-        if (m + n != k) return false;
-        vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
-        for (int i = 0; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
-                if (i == 0 && j == 0) dp[i][j] = true;
-                else if (i == 0) dp[i][j] = dp[i][j - 1] && s2[j - 1] == s3[i + j - 1];
-                else if (j == 0) dp[i][j] = dp[i - 1][j] && s1[i - 1] == s3[i + j - 1];
-                else dp[i][j] = (dp[i - 1][j] && s1[i - 1] == s3[i + j - 1]) || (dp[i][j - 1] && s2[j - 1] == s3[i + j - 1]);
-            }
+    
+    bool solve(string s1,string s2,string s3,int l1,int l2,int l3,vector<vector<int>> &dp){
+        
+        if(l1<0 && l2<0 && l3<0){
+            return true;
         }
-        return dp[m][n];
+        
+        if(l1>=0 && l2>=0 && dp[l1][l2]!=-1){
+            return dp[l1][l2];
+        }
+        
+        if(l1>=0 && s1[l1]==s3[l3] && l2>=0 && s2[l2]==s3[l3]){
+            dp[l1][l2] = solve(s1,s2,s3,l1-1,l2,l3-1,dp) || solve(s1,s2,s3,l1,l2-1,l3-1,dp);
+            return dp[l1][l2];
+        }
+        
+        if(l1>=0 && s1[l1]==s3[l3]){
+            return solve(s1,s2,s3,l1-1,l2,l3-1,dp);
+        }else if(l2>=0 && s2[l2]==s3[l3]){
+            return solve(s1,s2,s3,l1,l2-1,l3-1,dp);
+        }else{
+            return false;
+        }
+        
+    }
+    
+    bool isInterleave(string s1, string s2, string s3) {
+        
+        if(s1.size()+s2.size() != s3.size()){
+            return false;
+        }
+        
+        vector<vector<int>> dp(s1.size()+1,vector<int>(s2.size()+1,-1));
+        
+        return solve(s1,s2,s3,s1.size()-1,s2.size()-1,s3.size()-1,dp);
+        
     }
 };
