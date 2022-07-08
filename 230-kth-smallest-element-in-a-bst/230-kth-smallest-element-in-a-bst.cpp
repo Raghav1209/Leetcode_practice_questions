@@ -21,9 +21,9 @@ public:
                 x = root;
                 return;
             }
-            if(count>k){
-                return;
-            }
+            // if(count>k){
+            //     return;
+            // }
             solve(root->right,k,count);
         }
         
