@@ -32,7 +32,7 @@ public:
         return str;
     }
 
-    TreeNode* solve(istringstream &ss){
+    TreeNode* solve(stringstream &ss){
         
        
         string val;
@@ -57,7 +57,9 @@ public:
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         
-        istringstream ss(data);
+        // cout<<data;
+        
+        stringstream ss(data);
         return solve(ss);
         
         
