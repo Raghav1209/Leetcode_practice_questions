@@ -21,34 +21,51 @@ public:
 
 class Solution {
 public:
+    unordered_map<Node*,Node*> vis;
     Node* cloneGraph(Node* node) {
         
-       if(node==NULL){
-           return NULL;
-       } 
+//        if(node==NULL){
+//            return NULL;
+//        } 
         
-       unordered_map<Node*,Node*> vis;
-        queue<Node*> q;
-        Node* clone = new Node(node->val);
-       vis[node] = clone;
-        q.push(node);
+//        unordered_map<Node*,Node*> vis;
+//         queue<Node*> q;
+//         Node* clone = new Node(node->val);
+//        vis[node] = clone;
+//         q.push(node);
         
-        while(!q.empty()){
-            Node* curr = q.front();
-            q.pop();
+//         while(!q.empty()){
+//             Node* curr = q.front();
+//             q.pop();
             
-            for(auto nei : curr->neighbors){
-                if(!vis[nei]){
-                    vis[nei] = new Node(nei->val);
-                    q.push(nei);
-                }
-                vis[curr]->neighbors.push_back(vis[nei]);
-            }
+//             for(auto nei : curr->neighbors){
+//                 if(!vis[nei]){
+//                     vis[nei] = new Node(nei->val);
+//                     q.push(nei);
+//                 }
+//                 vis[curr]->neighbors.push_back(vis[nei]);
+//             }
             
+//         }
+        
+//         return vis[node];
+        
+        if(node==NULL){
+            return NULL;
         }
         
-        return vis[node];
+        if(vis[node]){
+            return vis[node];
+        }
         
+        Node* clone = new Node(node->val);
+        vis[node] = clone;
+        
+        for(auto nei : node->neighbors){
+            clone->neighbors.push_back(cloneGraph(nei));
+        }
+        
+        return clone;
         
     }
 };
