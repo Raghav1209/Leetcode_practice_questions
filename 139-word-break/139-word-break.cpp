@@ -11,20 +11,20 @@ public:
             return dp[s];
         }
         
-        // int flag;
+        int flag;
         for(int i=1;i<=s.size();i++){
-            // flag=0;
+            flag=0;
             string ss = s.substr(0,i);
-            // for(int j=0;j<wordDict.size();j++){
-            //     if(ss.compare(wordDict[j])==0){
-            //         flag = 1;
-            //         break;
-            //     }
-            // }
+            for(int j=0;j<wordDict.size();j++){
+                if(ss.compare(wordDict[j])==0){
+                    flag = 1;
+                    break;
+                }
+            }
             
-            auto it = find(wordDict.begin(),wordDict.end(),ss) != wordDict.end();
+            // auto it = find(wordDict.begin(),wordDict.end(),ss) != wordDict.end();
             
-            if(it && solve(s.substr(i),wordDict,dp)){
+            if(flag && solve(s.substr(i),wordDict,dp)){
                 return dp[s] = true;
                 // return true;
             }
@@ -41,15 +41,7 @@ public:
         unordered_map<string,bool> dp;
         return solve(s,wordDict,dp);
         
-//         if(x==1){
-//             return true;
-//         }
-        
-//         if(x==-1){
-//             return false;
-//         }
-        
-//         return true;
+
         
 
     }
