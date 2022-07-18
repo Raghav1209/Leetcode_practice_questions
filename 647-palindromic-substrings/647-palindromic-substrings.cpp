@@ -1,5 +1,7 @@
 class Solution {
 public:
+    
+    
     int countSubstrings(string s) {
         int count=0;
         int n = s.length();
@@ -9,9 +11,9 @@ public:
             return 0;
         }
         
-        if(n==1){
-            return 1;
-        }
+        // if(n==1){
+        //     return 1;
+        // }
         
         memset(dp,false,sizeof(dp));
         
@@ -26,6 +28,7 @@ public:
                 count++;
             }
         }
+        
         int i,j;
         for(int length=3;length<=n;length++){
             for(i=0;i<n-length+1;i++){
