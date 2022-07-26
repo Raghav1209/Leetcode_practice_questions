@@ -13,9 +13,8 @@ public:
         }
         
         if(n==0){
-            reverse(nums.begin(),nums.end());
-            nums.push_back(1);
-            reverse(nums.begin(),nums.end());
+            nums[0] = 1;
+            nums.push_back(0);
         }else{
             nums[n-1] += 1;
         }
