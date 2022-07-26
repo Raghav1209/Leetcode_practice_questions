@@ -15,7 +15,7 @@ public:
             return NULL;
         }
         
-        if(root==p || root==q){
+        if(root->val==p->val || root->val==q->val){
             return root;
         }
         
@@ -26,10 +26,10 @@ public:
             return root;
         }
         
-        if(lca1==NULL){
-            return lca2;
-        }else{
+        if(lca1!=NULL){
             return lca1;
+        }else{
+            return lca2;
         }
         
     }
