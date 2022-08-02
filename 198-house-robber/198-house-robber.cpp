@@ -20,8 +20,26 @@ public:
     
     int rob(vector<int>& nums) {
         
-        vector<int> dp(nums.size(),-1);
+        if(nums.size()==1){
+            return nums[0];
+        }
         
-        return solve(nums,0,dp);
+        vector<int> dp(nums.size());
+        
+        dp[nums.size()-1] = nums[nums.size()-1];
+        dp[nums.size()-2] = max(nums[nums.size()-1],nums[nums.size()-2]);
+        
+        for(int i=nums.size()-3;i>=0;i--){
+            
+            int x = dp[i+1];
+            int y = nums[i] + dp[i+2];
+        
+            dp[i] = max(x,y);
+        
+        }
+        
+        
+        
+        return dp[0];
     }
 };
