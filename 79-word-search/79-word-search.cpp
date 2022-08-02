@@ -3,12 +3,12 @@ public:
     
     bool find(vector<vector<char>> &board,string word,int index,int i,int j,vector<vector<bool>> &vis){
         
-        
+        if(index==word.size()){
+            return true;
+        }
+        vis[i][j] = true;
         if(board[i][j]==word[index]){
-            vis[i][j] = true;
-            if(index==word.length()-1){
-                return true;
-            }
+            
             if(i+1<board.size() && !vis[i+1][j] && find(board,word,index+1,i+1,j,vis)){
                 return true;
             }
@@ -21,10 +21,11 @@ public:
             if(j-1>=0 && !vis[i][j-1] && find(board,word,index+1,i,j-1,vis)){
                 return true;
             }
-            vis[i][j] = false;
-            return false;
+            if(index+1==word.size()){
+                return true;
+            }
         }
-        
+        vis[i][j] = false;
         return false;
            
         
