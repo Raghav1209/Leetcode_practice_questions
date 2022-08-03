@@ -1,16 +1,6 @@
 class Solution {
 public:
     
-//     static bool mycmp(pair<int,int> &a,pair<int,int> &b){
-        
-//         if(a.first==b.first){
-//             return a.second<b.second;
-//         }
-        
-//         return a.first<a.second;
-        
-//     }
-    
     vector<vector<int>> getSkyline(vector<vector<int>>& b) {
         
         vector<pair<int,int>> v;
