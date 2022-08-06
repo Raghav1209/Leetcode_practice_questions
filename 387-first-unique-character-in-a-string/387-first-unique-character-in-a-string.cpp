@@ -1,7 +1,7 @@
 class Solution {
 public:
     int firstUniqChar(string s) {
-        int n = 256;
+        int n = 128;
         vector<int> count(n,0);
         
         for(int i=0;i<s.size();i++){
