@@ -17,7 +17,7 @@ public:
         
         
         for(int i=0;i<temp.size();i++){
-            int k = i+rand()%original.size()-i;
+            int k = rand()%original.size();
             swap(temp[i],temp[k]);
         }
         
