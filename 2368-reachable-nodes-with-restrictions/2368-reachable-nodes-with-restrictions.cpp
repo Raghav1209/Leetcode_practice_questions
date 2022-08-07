@@ -16,24 +16,25 @@ public:
         queue<int> q;
         q.push(0);
         vis[0] = true;
-        int count = 0;
+        int count = 1;
         while(!q.empty()){
     
             int curr = q.front();
             q.pop();
             
-            if(s.find(curr)!=s.end()){
-                continue;
-            }
+            // if(s.find(curr)!=s.end()){
+            //     continue;
+            // }
             
-            count++;
+            // count++;
             
             for(int x : adj[curr]){
                 if(!vis[x]){
-                    
-                    q.push(x);
-                    vis[x] = true;
-                    
+                    if(s.find(x)==s.end()){
+                        count++;
+                        q.push(x);
+                        vis[x] = true;
+                    }
                 }
             }
         }
