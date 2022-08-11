@@ -19,9 +19,9 @@ public:
         int count = 1;
         while(!q.empty()){
     
-            int k = q.size();
+            // int k = q.size();
             
-            for(int i=0;i<k;i++){
+            // for(int i=0;i<k;i++){
                 int curr = q.front();
                 q.pop();
 
@@ -35,7 +35,7 @@ public:
                         }
                     }
                 }
-            }
+            // }
         }
                 
         
