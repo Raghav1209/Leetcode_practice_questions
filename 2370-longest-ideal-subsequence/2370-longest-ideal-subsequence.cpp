@@ -1,29 +1,29 @@
 class Solution {
 public:
     
-    int solve(string &s,int k,int prev,int idx,vector<vector<int>> &dp){
+    int solve(string &s,int k,int prev,int n,vector<vector<int>> &dp){
         
-        if(idx>=s.size()){
+        if(n<0){
             return 0;
         }
         
-        if(dp[idx][prev]!=-1){
-            return dp[idx][prev];
+        if(dp[n][prev]!=-1){
+            return dp[n][prev];
         }
         
         int maxx = -1;
         int take = 0;
         
-        int not_take = solve(s,k,prev,idx+1,dp);
+        int not_take = solve(s,k,prev,n-1,dp);
     
         
-        if(prev==0 || abs(s[idx]-prev)<=k){
-            take = 1+solve(s,k,s[idx],idx+1,dp);
+        if(prev==0 || abs(s[n]-prev)<=k){
+            take = 1+solve(s,k,s[n],n-1,dp);
         }
         
         maxx = max(take,not_take);
         
-        return dp[idx][prev] = maxx;
+        return dp[n][prev] = maxx;
         
     }
     
@@ -32,6 +32,6 @@ public:
         int prev = 0;
         vector<vector<int>> dp(s.size()+1,vector<int>(150,-1));
         
-        return solve(s,k,prev,0,dp);
+        return solve(s,k,prev,s.size()-1,dp);
     }
 };
