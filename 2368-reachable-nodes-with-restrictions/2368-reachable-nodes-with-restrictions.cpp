@@ -19,21 +19,20 @@ public:
         int count = 1;
         while(!q.empty()){
     
-            int curr = q.front();
-            q.pop();
+            int k = q.size();
             
-            // if(s.find(curr)!=s.end()){
-            //     continue;
-            // }
-            
-            // count++;
-            
-            for(int x : adj[curr]){
-                if(!vis[x]){
-                    if(s.find(x)==s.end()){
-                        count++;
-                        q.push(x);
-                        vis[x] = true;
+            for(int i=0;i<k;i++){
+                int curr = q.front();
+                q.pop();
+
+
+                for(int x : adj[curr]){
+                    if(!vis[x]){
+                        if(s.find(x)==s.end()){
+                            count++;
+                            q.push(x);
+                            vis[x] = true;
+                        }
                     }
                 }
             }
