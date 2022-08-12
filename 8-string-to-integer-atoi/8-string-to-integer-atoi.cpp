@@ -32,7 +32,6 @@ public:
         
         string str = "";
         long long res = 0;
-        int p = 0;
         bool ovf = false;
         
         while(i<n){
@@ -44,18 +43,18 @@ public:
             i++;
         }
         // cout<<str<<" ";
-        int j = str.size()-1;
-        while(j>=0){
+        int j = 0;
+        while(j<str.size()){
             
-            int val = str[j]-'0';
-            res += val*pow(10,p);
             
-            if((p>10) || res>INT_MAX){
+            res = res*10 + (str[j]-'0');
+            
+            if(res>INT_MAX){
                 ovf = true;
                 break;
             }
-            j--;
-            p++;
+            j++;
+            
             
         }
         
