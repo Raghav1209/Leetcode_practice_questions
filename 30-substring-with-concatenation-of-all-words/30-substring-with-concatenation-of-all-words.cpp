@@ -1,40 +1,45 @@
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
-       
-       int n = words.size();
-       int x = words[0].length();
-        
-       int window = n*x;
-        int s_len = s.length();
         vector<int> ans;
+        int x = words[0].size();
+        int n = words.size();
+        unordered_map<string,int> mp1;
         
-        unordered_map<string,int> f;
+        for(string str : words){
+            mp1[str]++;
+        }
         
-       for(auto x : words){
-           f[x]++;
-       } 
+        int sz = n*x; 
+        int lim = s.size()-sz;
         
-        int limit = s_len-window;
-        
-        for(int i=0;i<=limit;i++){
-            unordered_map<string,int> m;
+        for(int i=0;i<=lim;i++){
+            unordered_map<string,int> mp2;
             int flag = 0;
-            for(int j=i;j<s_len;j=j+x){
-                string str = s.substr(j,x);
-                if(f[str]>m[str]){
-                    m[str]++;
+            for(int j=i;j<s.size();j=j+x){
+                string check = s.substr(j,x);
+                
+                if(mp1[check]>mp2[check]){
+                    // cout<<check<<" ";
+                    mp2[check]++;
                     flag++;
+                    
                 }else{
                     break;
                 }
             }
+            
+            
             if(flag==n){
                 ans.push_back(i);
+                // i = i+sz;
             }
+            
         }
         
         return ans;
+        
+
         
     }
 };
