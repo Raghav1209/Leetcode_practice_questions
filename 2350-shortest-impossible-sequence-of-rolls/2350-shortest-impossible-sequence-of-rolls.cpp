@@ -1,10 +1,10 @@
-#define pi pair<int,int>
+// #define pi pair<int,int>
 class Solution {
 public:
     
     int shortestSequence(vector<int>& rolls, int k) {
         
-        set<pi> all;
+        set<pair<int,int>> all;
         
         vector<int> last(k+1,0);
         
