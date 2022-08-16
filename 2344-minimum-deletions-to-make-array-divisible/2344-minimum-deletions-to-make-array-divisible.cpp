@@ -8,12 +8,19 @@ public:
             gc = __gcd(gc,numsDivide[i]);
         }
         
+        cout<<gc<<" ";
+        
         sort(nums.begin(),nums.end());
         
         for(int i=0;i<nums.size();i++){
-            if(__gcd(nums[i],gc)==nums[i]){
+            // if(__gcd(nums[i],gc)==nums[i]){
+            //     return i;
+            // }
+            
+            if(gc%nums[i]==0){
                 return i;
             }
+            
         }
         
         return -1;
