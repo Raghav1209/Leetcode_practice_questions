@@ -8,17 +8,20 @@ public:
             gc = __gcd(gc,numsDivide[i]);
         }
         
-        cout<<gc<<" ";
-        
-        sort(nums.begin(),nums.end());
+        map<int,int> mp;
         
         for(int i=0;i<nums.size();i++){
-            // if(__gcd(nums[i],gc)==nums[i]){
-            //     return i;
-            // }
+            mp[nums[i]]++;
+        }
+        
+        int count = 0;
+        
+        for(auto x : mp){
             
-            if(gc%nums[i]==0){
-                return i;
+            if(gc%x.first==0){
+                return count;
+            }else{
+                count += x.second;
             }
             
         }
