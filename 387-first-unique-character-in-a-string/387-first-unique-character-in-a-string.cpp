@@ -1,16 +1,16 @@
 class Solution {
 public:
     int firstUniqChar(string s) {
-        int n = 128;
+        int n = 26;
         vector<int> count(n,0);
         
         for(int i=0;i<s.size();i++){
-            count[s[i]-'0']++;
+            count[s[i]-'a']++;
         }
         
         for(int i=0;i<s.size();i++)
         {
-            if(count[s[i]-'0']==1){
+            if(count[s[i]-'a']==1){
                 return i;
             }
         }
