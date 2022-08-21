@@ -18,7 +18,7 @@ public:
         queue<TreeNode*> q;
         vector<int> v;
         q.push(root);
-        v.push_back(root->val);
+        // v.push_back(root->val);
         
         while(!q.empty()){
             TreeNode* curr = q.front();
@@ -27,14 +27,14 @@ public:
             if(curr->left){
                 adj[curr->val].push_back(curr->left->val);
                 adj[curr->left->val].push_back(curr->val);
-                v.push_back(curr->left->val);
+                // v.push_back(curr->left->val);
                 q.push(curr->left);
             }
             
             if(curr->right){
                 adj[curr->val].push_back(curr->right->val);
                 adj[curr->right->val].push_back(curr->val);
-                v.push_back(curr->right->val);
+                // v.push_back(curr->right->val);
                 q.push(curr->right);
             }
             
