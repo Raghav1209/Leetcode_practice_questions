@@ -13,10 +13,15 @@ public:
         for(int i=2;i*i<n;i++){
             if(prime[i]){
                 for(int j=2;i*j<=n;j++){
-                    prime[i*j] = false;
+                    
+                       prime[i*j] = false;
                 }
             }
         }
+        
+        // for(int i=0;i<prime.size();i++){
+        //     cout<<prime[i]<<" ";
+        // }
         
         int res = 0;
         
