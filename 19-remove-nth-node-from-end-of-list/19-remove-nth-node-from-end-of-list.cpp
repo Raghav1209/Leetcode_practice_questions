@@ -20,9 +20,9 @@ public:
             p=p->next;
         }
         
-        if(count==1 && n==1){
-            return NULL;
-        }
+        // if(count==1 && n==1){
+        //     return NULL;
+        // }
         
         if(count==n){
             return head->next;
