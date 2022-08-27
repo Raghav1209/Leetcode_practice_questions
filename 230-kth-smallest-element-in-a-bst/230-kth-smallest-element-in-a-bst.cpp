@@ -12,27 +12,34 @@
 class Solution {
 public:
     
-    void solve(TreeNode* root,int k,int &count){
+    void solve(TreeNode* root,int k, priority_queue<int> &pq){
         
-        if(root!=NULL){
-            solve(root->left,k,count);
-            count++;
-            if(count==k){
-                x = root;
-                return;
-            }
-            // if(count>k){
-            //     return;
-            // }
-            solve(root->right,k,count);
+        if(root==NULL){
+            return;
         }
+        
+        solve(root->left,k,pq);
+        
+        if(pq.size()!=k){
+            pq.push(root->val);
+        }else{
+            if(pq.top()>root->val){
+                pq.pop();
+                pq.push(root->val);
+            }
+        }
+        
+        solve(root->right,k,pq);
         
     }
     
-    TreeNode* x;
     int kthSmallest(TreeNode* root, int k) {
-        int count = 0;   
-        solve(root,k,count);
-        return x->val;
+        
+        priority_queue<int> pq;
+        
+        solve(root,k,pq);
+        
+        return pq.top();
+        
     }
 };
