@@ -1,59 +1,39 @@
 class Solution {
 public:
+    
+    bool isPalindrome(string s){
+        int l = 0;
+        int h = s.size()-1;
+        
+        while(l<h){
+            if(s[l]!=s[h]){
+                return false;
+            }
+            l++;
+            h--;
+        }
+        return true;
+        
+    }
+    
     bool validPalindrome(string s) {
-        int start = 0;
-        int end = s.size() - 1;
-        int cnt = 0;
         
-        while(start < end){
-            if(s[start] == s[end])
-            {
-				// if char matches increment start and decrement end
-                start++;
-                end--;
+        int l = 0;
+        int h = s.size()-1;
+        int count = 0;
+        while(l<h){
+            if(s[l]==s[h]){
+                l++;
+                h--;
+            }else if(s[l]==s[h-1] && isPalindrome(s.substr(l,h-l))){
+                return true;
+            }else if(s[h]==s[l+1] && isPalindrome(s.substr(l+1,h-l))){
+               return true;
+            }else{
+                return false;
             }
-            else
-            {
-				// keeping cnt of character that didn't match
-                cnt++;
-               start++;     //skip 1 from starting
-            }
-			// for optimising code if cnt is greater than 1 
-            // we will just break the loop as only one char can skipped/deleted.
-            if(cnt > 1)
-                break;
         }
+        return true;
         
-		// reinitialize pointer 
-        start = 0;
-        end = s.size() - 1;
-        int cnt1 = 0;
-        
-        while(start < end){
-            if(s[start] == s[end])
-            {
-				// if char matches increment start and decrement end
-                start++;
-                end--;  
-            }
-            else
-            {
-				// keeping cnt of character that didn't match
-                cnt1++;
-                end--;  //skip 1 from ending
-            }
-			// for optimising code if cnt is greater than 1 
-            // we will just break the loop as only one char can skipped/deleted.
-            if(cnt1 > 1)
-                break;
-               
-        }
-        
-        if(cnt == 1 || cnt1 == 1)   //del atmost one char
-            return true;
-        if(cnt == 0 || cnt1 == 0)    //palindrome
-            return true;
-        
-        return false;
     }
 };
