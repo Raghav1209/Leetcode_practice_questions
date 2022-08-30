@@ -2,8 +2,10 @@ class Solution {
 public:
     vector<int> temp;
     vector<int> original;
+    
     Solution(vector<int>& nums) {
         original = nums;
+        temp = nums;
     }
     
     vector<int> reset() {
@@ -11,18 +13,13 @@ public:
     }
     
     vector<int> shuffle() {
-        temp = original;
-        
-        
-        
-        
         for(int i=0;i<temp.size();i++){
-            int k = rand()%original.size();
-            swap(temp[i],temp[k]);
+            int x = rand()%original.size();
+            swap(temp[i],temp[x]);
         }
         
-        
         return temp;
+        
     }
 };
 
