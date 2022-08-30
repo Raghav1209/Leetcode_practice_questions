@@ -12,27 +12,30 @@ class Solution {
 public:
     
     ListNode* reverse(ListNode* head){
-        ListNode* prev = NULL;
-        ListNode* curr = head;
-        ListNode* nextnode = head;
         
-        while(nextnode){
-            nextnode = nextnode->next;
+        ListNode* curr = head;
+        ListNode* nextNode = head;
+        ListNode* prev = NULL;
+        
+        while(nextNode){
+            nextNode = nextNode->next;
             curr->next = prev;
             prev = curr;
-            curr = nextnode;
+            curr = nextNode;
         }
         
         return prev;
+        
     }
     
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        
         ListNode* p = list1;
         ListNode* q = list2;
         ListNode* res = NULL;
         
         while(p!=NULL && q!=NULL){
-            if(p->val<=q->val){
+            if(p->val<q->val){
                 ListNode* node = new ListNode(p->val);
                 node->next = res;
                 res = node;
@@ -43,26 +46,24 @@ public:
                 res = node;
                 q=q->next;
             }
-            
         }
         
-        while(p){
+        while(p!=NULL){
             ListNode* node = new ListNode(p->val);
             node->next = res;
             res = node;
             p=p->next;
         }
         
-        while(q){
+        while(q!=NULL){
             ListNode* node = new ListNode(q->val);
             node->next = res;
             res = node;
             q=q->next;
         }
         
-        res = reverse(res);
-        
-        return res;
+        return reverse(res);
         
     }
+    
 };
