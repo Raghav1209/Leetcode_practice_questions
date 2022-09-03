@@ -45,7 +45,7 @@ public:
     
     int maximumRows(vector<vector<int>>& mat, int col) {
         
-        solve(mat,col,0);
+        int x = solve(mat,col,0);
         return ans;
     }
 };
