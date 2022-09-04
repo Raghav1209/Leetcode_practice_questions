@@ -32,7 +32,10 @@ public:
         for(auto q:mp){
             vector<int> col;
             for(auto p:q.second){
-                col.insert(col.end(),p.second.begin(),p.second.end());
+                // col.insert(col.end(),p.second.begin(),p.second.end());
+                for(auto x : p.second){
+                    col.push_back(x);
+                }
             }
             ans.push_back(col);
         }
