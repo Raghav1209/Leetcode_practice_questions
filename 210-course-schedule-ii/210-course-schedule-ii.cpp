@@ -1,66 +1,70 @@
 class Solution {
 public:
     
-    void DFS(int s,vector<int> adj[],vector<bool> &vis,stack<int> &st){
+    void DFS(vector<int> adj[],vector<int> &vis,int s,stack<int> &st){
         
-        vis[s] = true;
+        vis[s] = 1;
         
         for(int v : adj[s]){
             if(!vis[v]){
-                DFS(v,adj,vis,st);
+                DFS(adj,vis,v,st);
             }
         }
         
         st.push(s);
-        
     }
     
-    bool cycle(vector<int> adj[],vector<bool> &vis,int s,vector<bool> &rect){
+    bool checkCycle(vector<int> adj[],vector<int> &vis,vector<int> &rect,int s){
         
-        vis[s] = true;
-        rect[s] = true;
+        vis[s] = 1;
+        rect[s] = 1;
         
         for(int v : adj[s]){
             if(!vis[v]){
-                if(cycle(adj,vis,v,rect)==true){
+                if(checkCycle(adj,vis,rect,v)){
                     return true;
                 }
-            }else if(rect[v]){
+            }else if(rect[v]==true){
                 return true;
             }
         }
         
-        rect[s] = false;
+        rect[s] = 0;
         return false;
         
     }
     
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+    vector<int> findOrder(int n, vector<vector<int>>& p) {
         
-        vector<bool> vis(numCourses,false);
-        vector<bool> rect(numCourses,false);
-        vector<int> adj[numCourses];
-        stack<int> st;
-        vector<int> ans;
+        vector<int> adj[n];
         
-        for(int i=0;i<prerequisites.size();i++){
-            int source = prerequisites[i][1];
-            int des = prerequisites[i][0];
-            adj[source].push_back(des);
+        vector<int> vis(n,0);
+        vector<int> rect(n,0);
+        
+        for(int i=0;i<p.size();i++){
+            int s = p[i][0];
+            int d = p[i][1];
+            adj[d].push_back(s);
         }
         
-        for(int i=0;i<numCourses;i++){
-            if(cycle(adj,vis,i,rect)==true){
-                return ans;
+        vector<int> ans;
+        
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                if(checkCycle(adj,vis,rect,i)){
+                    return ans;
+                }
             }
         }
         
-        vis = vector<bool>(numCourses,false);
+       vis = vector<int>(n,0);
         
         
-        for(int i=0;i<numCourses;i++){
-            if(vis[i]==false){
-                DFS(i,adj,vis,st);
+        stack<int> st;
+        
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                DFS(adj,vis,i,st);
             }
         }
         
