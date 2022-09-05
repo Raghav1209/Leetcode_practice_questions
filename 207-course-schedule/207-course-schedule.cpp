@@ -1,46 +1,49 @@
 class Solution {
 public:
-    bool canFinish(int n, vector<vector<int>>& edges) {
+    
+    bool DFS(vector<int> adj[],vector<int> &vis,vector<int> &rect,int s){
+        
+        vis[s] = 1;
+        rect[s] = 1;
+        
+        for(int v : adj[s]){
+            if(!vis[v]){
+                if(DFS(adj,vis,rect,v)){
+                    return true;
+                }
+            }else if(rect[v]==true){
+                return true;
+            }
+        }
+        
+        rect[s] = 0;
+        return 0;
+    }
+    
+    bool canFinish(int n, vector<vector<int>>& p) {
         
         vector<int> adj[n];
-        vector<int> indegree(n,0);
-        for(int i=0;i<edges.size();i++){
+        
+        for(int i=0;i<p.size();i++){
+            int d = p[i][1];
+            int s = p[i][0];
             
-            adj[edges[i][1]].push_back(edges[i][0]);
-            indegree[edges[i][0]]++;
+            adj[d].push_back(s);
             
         }
         
-        queue<int> q;
-        vector<int> res;
+        vector<int> vis(n+1,0);
+        vector<int> rect(n+1,0);
         
         for(int i=0;i<n;i++){
-            if(indegree[i]==0){
-                q.push(i);
-            }
-        }
-        
-        while(!q.empty()){
-            int u = q.front();
-            q.pop();
-            res.push_back(u);
-            for(auto v : adj[u]){
-                indegree[v]--;
-                if(indegree[v]==0){
-                    q.push(v);
+            if(vis[i]==0){
+                if(DFS(adj,vis,rect,i)){
+                    return false;
                 }
             }
-            
         }
         
-        if(res.size()==n){
-            return true;
-        }else{
-            return false;
-        }
-        
-        
-        
+        return true;
         
     }
 };
