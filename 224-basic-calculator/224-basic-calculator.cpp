@@ -30,14 +30,7 @@ public:
                 
                 result += num*sign;
                 i--;
-                                
-                // int num=s[i]-'0';
-                // while(i+1<len && isdigit(s[i+1])){
-                //     num=num*10+(s[i+1]-'0');
-                //     i++;
-                // }
-                // //now add it to the result along with sign
-                // result += num*sign;
+                            
                 
             }else if(s[i]=='('){
                 st.push(result);
