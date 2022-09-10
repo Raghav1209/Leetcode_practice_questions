@@ -11,7 +11,7 @@ public:
         string str = strs[i];
         vector<int> count(256,0);
         for(int i=0;i<str.size();i++){
-            count[str[i]-'a']++;
+            count[str[i]-'0']++;
         }
 
         // if(mp.find(count)==mp.end()){
