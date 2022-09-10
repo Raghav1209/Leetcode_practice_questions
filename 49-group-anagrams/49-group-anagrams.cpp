@@ -14,13 +14,13 @@ public:
             count[str[i]-'0']++;
         }
 
-        // if(mp.find(count)==mp.end()){
-        //     mp[count].push_back(strs[i]);
-        // }else{
-        //     mp[count].push_back(strs[i]);
-        // }
+        if(mp.find(count)==mp.end()){
+            mp[count].push_back(strs[i]);
+        }else{
+            mp[count].push_back(strs[i]);
+        }
         
-        mp[count].push_back(strs[i]);
+        // mp[count].push_back(strs[i]);
 
     }
 
