@@ -1,32 +1,45 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>> v;
-        int n = strs.size();
-        string str = "";
-        unordered_map<string,vector<string>> mp;
-        
-       vector<string> v1;
-        
-        for(int i=0;i<n;i++){
-            str = strs[i];
-            sort(str.begin(),str.end());
-            v1.push_back(str);
-            str = "";
+    
+
+    map<vector<int>,vector<string>> mp;
+    vector<vector<string>> ans;
+    // vector<int> v;
+
+    for(int i=0;i<strs.size();i++){
+        string str = strs[i];
+        vector<int> count(256,0);
+        for(int i=0;i<str.size();i++){
+            count[str[i]-'a']++;
         }
+
+        // if(mp.find(count)==mp.end()){
+        //     mp[count].push_back(strs[i]);
+        // }else{
+        //     mp[count].push_back(strs[i]);
+        // }
         
-        
-        
-        for(int i=0;i<v1.size();i++){
-            mp[v1[i]].push_back(strs[i]);
-        }
-        
-        for(auto x : mp){
-           vector<string> v2 = x.second;
-            v.push_back(v2);
-        }
-        
-        
-        return v;
+        mp[count].push_back(strs[i]);
+
     }
+
+    // unordered_map<vector<int>,vector<string>> :: iterator it;
+
+    for(auto &x : mp){
+        vector<string> res = x.second;
+        ans.push_back(res);
+    }
+
+    return ans;
+}
+    
+
+
+
+
+// strs = ["eat","tea","tan","ate","nat","bat"]
+// [eat, tea, ate],  [tan, nat], [bat]
+
+// O(n * klogk)
 };
