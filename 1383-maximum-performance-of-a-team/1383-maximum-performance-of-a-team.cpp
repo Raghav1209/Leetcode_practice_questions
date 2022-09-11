@@ -28,7 +28,7 @@ public:
             
         }
         
-        return res%(int)1000000007;
+        return res%1000000007;
         
     }
 };
