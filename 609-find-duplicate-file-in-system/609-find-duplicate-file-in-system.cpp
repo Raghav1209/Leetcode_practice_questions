@@ -19,18 +19,18 @@ public:
                 }else{
                     int i = 0;
                     int fileNameLen = 0;
-                    while(i<s.size() && s[i++]!='('){
+                    while(i<s.size() && s[i]!='('){
                         fileNameLen++;
-                        // i++;
+                        i++;
                     }
                     string fileName;
                     fileName = s.substr(0,fileNameLen);
                     // cout<<fileName<<endl;
                     int j = fileNameLen+1;
                     int fileContentLen = 0;
-                    while(j<s.size() && s[j++]!=')'){
+                    while(j<s.size() && s[j]!=')'){
                         fileContentLen++;
-                        // j++;
+                        j++;
                     }
                     
                     string fileContentName;
