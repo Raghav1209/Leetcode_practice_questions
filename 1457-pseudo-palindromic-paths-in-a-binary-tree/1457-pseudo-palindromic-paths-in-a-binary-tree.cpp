@@ -1,45 +1,54 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
     
-    void preorder(TreeNode* root,int path){
+    void preorder(TreeNode* root){
         
-        path ^= (1<<root->val);
-        
-        if(root->left==NULL && root->right==NULL){
-            if((path&(path-1)) == 0){
-                ans++;
-            }
+        if(root==NULL){
             return;
         }
         
+        mp[root->val]++;
+        
+        if(root->left==NULL && root->right==NULL){
+            int count = 0;
+            
+            for(auto it : mp){
+                if(it.second%2!=0){
+                    count++;
+                }
+            }
+            
+            if(count<=1){
+                ans++;
+            }
+            
+            // mp[root->val]--;
+            // return;
+            
+        }
+        
         if(root->left){
-            preorder(root->left,path);
+            preorder(root->left);
         }
         
         if(root->right){
-            preorder(root->right,path);
+            preorder(root->right);
         }
+        mp[root->val]--;
         
     }
     
     int ans = 0;
+    unordered_map<int,int> mp;
     int pseudoPalindromicPaths (TreeNode* root) {
         
         if(root==NULL){
             return 0;
         }
-        preorder(root,0);
+        
+        
+        
+        preorder(root);
         
         return ans;
         
