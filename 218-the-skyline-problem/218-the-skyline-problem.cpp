@@ -21,6 +21,10 @@ public:
         
         sort(v.begin(),v.end());
         
+        // for(auto x : v){
+        //     cout<<x.first<<" "<<x.second<<endl;
+        // }
+        
         for(auto x : v){
             
             int co = x.first;
