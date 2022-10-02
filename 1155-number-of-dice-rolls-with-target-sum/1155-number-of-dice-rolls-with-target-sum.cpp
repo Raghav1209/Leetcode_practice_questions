@@ -1,17 +1,33 @@
 class Solution {
 public:
-    int numRollsToTarget(int d, int f, int target) {
-        int m=1000000007;
-        vector<vector<int> > dp(d+1, vector<int>(target+1, 0));
-        dp[0][0]=1;
-        for(int i=1; i<=d; i++){
-            for(int j=1; j<=target; j++){
-                for(int k=1; k<=f; k++){
-                    if(k<=j)
-                        dp[i][j]=((dp[i][j]%m)+(dp[i-1][j-k]%m))%m;
-                }
-            }
+    int mod = 1000000007;
+    int solve(int d,int f,int t,vector<vector<int>> &dp){
+        
+        if(d==0 && t==0){
+            return 1;
         }
-        return dp[d][target];
+        
+        if(d<=0 || t<=0){
+            return 0;
+        }
+        
+        if(dp[d][t]!=-1){
+            return dp[d][t];
+        }
+        
+        int count  = 0;
+        for(int i=1;i<=f;i++){
+            count = ((count%mod) + (solve(d-1,f,t-i,dp)%mod))%mod;
+        }
+        
+        return dp[d][t] = count%mod;
+        
+    }
+    
+    int numRollsToTarget(int d, int f, int t) {
+        
+        vector<vector<int>> dp(32,vector<int>(1002,-1));
+        return solve(d,f,t,dp)%mod;
+        
     }
 };
