@@ -7,54 +7,61 @@ public:
     
     void set(string key, string value, int timestamp) {
         
-        if(mp.find(key)!=mp.end()){
+//         if(mp.find(key)!=mp.end()){
             
-            mp[key][timestamp] = value;
+//             mp[key][timestamp] = value;
             
-        }else{
-             mp[key][timestamp] = value;
-        }
+//         }else{
+//              mp[key][timestamp] = value;
+//         }
+        
+        mp[key][timestamp] = value;
        
         
     }
     
     string get(string key, int timestamp) {
         
-//         if(mp.find(key)!=mp.end()){
-//             unordered_map<int,string> mp1 = mp[key];
+        if(mp.find(key)!=mp.end()){
+            // unordered_map<int,string> mp1 = mp[key];
             
-//             if(mp1.find(timestamp)!=mp1.end()){
-//                 return mp1[timestamp];
-//             }else{
-//                 int time = timestamp;
-//                 while(time){
-//                     if(mp1.find(time)!=mp1.end()){
-//                         return mp1[time];
-//                     }else{
-//                         time--;
-//                     }
-//                 }
-//             }
+            if(mp[key].find(timestamp)!=mp[key].end()){
+                return mp[key][timestamp];
+            }else{
+                int time = timestamp;
+                // while(time){
+                //     if(mp1.find(time)!=mp1.end()){
+                //         return mp1[time];
+                //     }else{
+                //         time--;
+                //     }
+                // }
+                for(int time=timestamp;time>=1;time--){
+                    if(mp[key].find(time)!=mp[key].end()){
+                        return mp[key][time];
+                    }
+                }
+            }
             
             // int time_prev = mp1.lower_bound(time);
             // return mp1[time_prev];
         
-            if(mp.find(key) == mp.end())
-        {
-            return "";
-        }
-        string ans="";
+//             if(mp.find(key) == mp.end())
+//         {
+//             return "";
+//         }
+//         string ans="";
         
-        for(int currTime = timestamp; currTime >=1; currTime--)
-        {
-            if(mp[key].find(currTime) != mp[key].end())
-                return mp[key][currTime];
-        }
+//         for(int currTime = timestamp; currTime >=1; currTime--)
+//         {
+//             if(mp[key].find(currTime) != mp[key].end())
+//                 return mp[key][currTime];
+//         }
         
-        return ans;
+//         return ans;
             
-        // }
-        // return "";
+        }
+        return "";
     }
 };
 
